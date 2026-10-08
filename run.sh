@@ -38,6 +38,7 @@ cd "$UPSTREAM_DIR"
 run() { echo "\$ $1"; bash -c "$1"; }
 {
   run "date -u '+%Y-%m-%d %H:%M:%S UTC'; git rev-parse HEAD; nproc; uname -m; go version"
+  run "lscpu | grep -E '^CPU\\(s\\)|Model name|Thread\\(s\\) per core|Core\\(s\\) per socket|Socket\\(s\\)|Vendor ID' || true"
   # 3. Generator: regenerate both published vectors field for field, then build k=3,4,5.
   run "go test $T -run 'TestGeneratorReproducesPublishedVectors|TestGenerateMidVectors' -count=1 -v | grep RESULT"
   # 4. Compile all five circuits and run a local groth16.Setup into last_build/.
