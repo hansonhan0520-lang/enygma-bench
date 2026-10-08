@@ -1,0 +1,45 @@
+name: enygma-bench
+
+on:
+  workflow_dispatch:
+    inputs:
+      bench_runs:
+        description: "Timed proofs per configuration"
+        default: "20"
+  push:
+    branches: [main]
+    paths: ["harness/**", "run.sh", "extract_vectors.py", ".github/workflows/bench.yml"]
+
+jobs:
+  bench:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            label: github-x64
+          - runner: ubuntu-24.04-arm
+            label: github-arm64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.8"
+          cache: false
+      - name: Hardware
+        run: |
+          nproc; uname -m; lscpu | grep -E 'Model name|^CPU\(s\)|Thread|Core' || true; free -h
+      - name: Benchmark
+        env:
+          GOTOOLCHAIN: local
+          BENCH_PROCS: "1,2,4"
+          BENCH_RUNS: ${{ github.event.inputs.bench_runs || '20' }}
+          HTTP_RUNS: "10"
+          LABEL: ${{ matrix.label }}
+        run: ./run.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.label }}-log
+          path: results/${{ matrix.label }}.log
