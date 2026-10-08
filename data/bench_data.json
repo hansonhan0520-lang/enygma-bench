@@ -1,0 +1,1271 @@
+{
+ "upstream_commit": "67c4c26696016b48e70950e284ae1a51b7d0cf0e",
+ "harness_repo": "https://github.com/hansonhan0520-lang/enygma-bench",
+ "machines": {
+  "intel_8573c": {
+   "file": "github-x64-run37741247183.log",
+   "prove": {
+    "2": {
+     "1": {
+      "min": 747.0,
+      "median": 755.0,
+      "max": 768.0,
+      "n": 20
+     },
+     "2": {
+      "min": 415.0,
+      "median": 420.0,
+      "max": 427.0,
+      "n": 20
+     },
+     "4": {
+      "min": 336.0,
+      "median": 356.0,
+      "max": 368.0,
+      "n": 20
+     }
+    },
+    "3": {
+     "1": {
+      "min": 930.0,
+      "median": 935.0,
+      "max": 937.0,
+      "n": 20
+     },
+     "2": {
+      "min": 514.0,
+      "median": 519.0,
+      "max": 528.0,
+      "n": 20
+     },
+     "4": {
+      "min": 410.0,
+      "median": 432.0,
+      "max": 451.0,
+      "n": 20
+     }
+    },
+    "4": {
+     "1": {
+      "min": 1014.9999999999999,
+      "median": 1020.0,
+      "max": 1058.0,
+      "n": 20
+     },
+     "2": {
+      "min": 562.0,
+      "median": 568.0,
+      "max": 596.0,
+      "n": 20
+     },
+     "4": {
+      "min": 450.0,
+      "median": 474.0,
+      "max": 488.0,
+      "n": 20
+     }
+    },
+    "5": {
+     "1": {
+      "min": 1091.0,
+      "median": 1097.0,
+      "max": 1138.0,
+      "n": 20
+     },
+     "2": {
+      "min": 587.0,
+      "median": 594.0,
+      "max": 612.0,
+      "n": 20
+     },
+     "4": {
+      "min": 472.0,
+      "median": 492.0,
+      "max": 507.0,
+      "n": 20
+     }
+    },
+    "6": {
+     "1": {
+      "min": 1537.0,
+      "median": 1548.0,
+      "max": 1590.0,
+      "n": 20
+     },
+     "2": {
+      "min": 815.0,
+      "median": 824.0,
+      "max": 839.0,
+      "n": 20
+     },
+     "4": {
+      "min": 675.0,
+      "median": 707.0,
+      "max": 722.0,
+      "n": 20
+     }
+    }
+   },
+   "keyload": {
+    "2": {
+     "ccs_first": 25.0,
+     "ccs_rest": 24.0,
+     "pk_first": 1103.0,
+     "pk_rest": 1130.0
+    },
+    "3": {
+     "ccs_first": 31.0,
+     "ccs_rest": 32.0,
+     "pk_first": 1302.0,
+     "pk_rest": 1314.0
+    },
+    "4": {
+     "ccs_first": 37.0,
+     "ccs_rest": 37.0,
+     "pk_first": 1506.0,
+     "pk_rest": 1506.0
+    },
+    "5": {
+     "ccs_first": 44.0,
+     "ccs_rest": 44.0,
+     "pk_first": 1708.0,
+     "pk_rest": 1711.0
+    },
+    "6": {
+     "ccs_first": 50.0,
+     "ccs_rest": 49.0,
+     "pk_first": 2071.0,
+     "pk_rest": 2070.0
+    }
+   },
+   "http": {
+    "2": {
+     "cold": 1517.123,
+     "median": 354.704,
+     "n": 10
+    },
+    "3": {
+     "cold": 1770.2279999999998,
+     "median": 419.74699999999996,
+     "n": 10
+    },
+    "4": {
+     "cold": 2025.2279999999998,
+     "median": 469.64099999999996,
+     "n": 10
+    },
+    "5": {
+     "cold": 2271.4660000000003,
+     "median": 487.473,
+     "n": 10
+    },
+    "6": {
+     "cold": 2842.416,
+     "median": 699.121,
+     "n": 10
+    }
+   },
+   "verify": {
+    "2": {
+     "ok": true,
+     "ms": 0.788,
+     "vector": "repo"
+    },
+    "3": {
+     "ok": true,
+     "ms": 0.893,
+     "vector": "generated"
+    },
+    "4": {
+     "ok": true,
+     "ms": 0.906,
+     "vector": "generated"
+    },
+    "5": {
+     "ok": true,
+     "ms": 0.892,
+     "vector": "generated"
+    },
+    "6": {
+     "ok": true,
+     "ms": 0.976,
+     "vector": "repo"
+    }
+   },
+   "size": {
+    "2": {
+     "constraints": 37140,
+     "domain": 65536,
+     "proof": 164,
+     "public": 588,
+     "pk": 6309223
+    },
+    "3": {
+     "constraints": 45252,
+     "domain": 65536,
+     "proof": 164,
+     "public": 844,
+     "pk": 7227605
+    },
+    "4": {
+     "constraints": 53364,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1100,
+     "pk": 8145987
+    },
+    "5": {
+     "constraints": 61476,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1356,
+     "pk": 9064369
+    },
+    "6": {
+     "constraints": 69588,
+     "domain": 131072,
+     "proof": 164,
+     "public": 1612,
+     "pk": 12079903
+    }
+   },
+   "cpus": 4,
+   "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+   "threads_per_core": 2,
+   "cores": 2,
+   "numcpu": 4,
+   "arch": "amd64",
+   "start": "2026-10-08 07:04:55 UTC",
+   "end": "2026-10-08 07:11:26 UTC"
+  },
+  "neoverse_n2": {
+   "file": "github-arm64-run37741247183.log",
+   "prove": {
+    "2": {
+     "1": {
+      "min": 870.0,
+      "median": 873.0,
+      "max": 877.0,
+      "n": 20
+     },
+     "2": {
+      "min": 481.0,
+      "median": 485.0,
+      "max": 489.0,
+      "n": 20
+     },
+     "4": {
+      "min": 299.0,
+      "median": 330.0,
+      "max": 345.0,
+      "n": 20
+     }
+    },
+    "3": {
+     "1": {
+      "min": 1092.0,
+      "median": 1095.0,
+      "max": 1101.0,
+      "n": 20
+     },
+     "2": {
+      "min": 603.0,
+      "median": 608.0,
+      "max": 611.0,
+      "n": 20
+     },
+     "4": {
+      "min": 373.0,
+      "median": 400.0,
+      "max": 424.0,
+      "n": 20
+     }
+    },
+    "4": {
+     "1": {
+      "min": 1200.0,
+      "median": 1203.0,
+      "max": 1215.0,
+      "n": 20
+     },
+     "2": {
+      "min": 658.0,
+      "median": 662.0,
+      "max": 667.0,
+      "n": 20
+     },
+     "4": {
+      "min": 396.0,
+      "median": 433.0,
+      "max": 450.0,
+      "n": 20
+     }
+    },
+    "5": {
+     "1": {
+      "min": 1298.0,
+      "median": 1301.0,
+      "max": 1319.0,
+      "n": 20
+     },
+     "2": {
+      "min": 688.0,
+      "median": 691.0,
+      "max": 695.0,
+      "n": 20
+     },
+     "4": {
+      "min": 409.0,
+      "median": 444.0,
+      "max": 470.0,
+      "n": 20
+     }
+    },
+    "6": {
+     "1": {
+      "min": 1801.0,
+      "median": 1807.0,
+      "max": 1820.0,
+      "n": 20
+     },
+     "2": {
+      "min": 946.0,
+      "median": 954.0,
+      "max": 959.0,
+      "n": 20
+     },
+     "4": {
+      "min": 582.0,
+      "median": 633.0,
+      "max": 658.0,
+      "n": 20
+     }
+    }
+   },
+   "keyload": {
+    "2": {
+     "ccs_first": 30.0,
+     "ccs_rest": 22.0,
+     "pk_first": 1038.0,
+     "pk_rest": 1037.0
+    },
+    "3": {
+     "ccs_first": 25.0,
+     "ccs_rest": 33.0,
+     "pk_first": 1231.0,
+     "pk_rest": 1238.0
+    },
+    "4": {
+     "ccs_first": 35.0,
+     "ccs_rest": 31.0,
+     "pk_first": 1427.0,
+     "pk_rest": 1425.0
+    },
+    "5": {
+     "ccs_first": 38.0,
+     "ccs_rest": 39.0,
+     "pk_first": 1615.0,
+     "pk_rest": 1622.0
+    },
+    "6": {
+     "ccs_first": 49.0,
+     "ccs_rest": 46.0,
+     "pk_first": 1941.0,
+     "pk_rest": 1945.0
+    }
+   },
+   "http": {
+    "2": {
+     "cold": 1397.635,
+     "median": 326.478,
+     "n": 10
+    },
+    "3": {
+     "cold": 1624.201,
+     "median": 403.567,
+     "n": 10
+    },
+    "4": {
+     "cold": 2067.5750000000003,
+     "median": 428.882,
+     "n": 10
+    },
+    "5": {
+     "cold": 2091.3979999999997,
+     "median": 422.692,
+     "n": 10
+    },
+    "6": {
+     "cold": 2618.228,
+     "median": 615.826,
+     "n": 10
+    }
+   },
+   "verify": {
+    "2": {
+     "ok": true,
+     "ms": 1.124,
+     "vector": "repo"
+    },
+    "3": {
+     "ok": true,
+     "ms": 1.16,
+     "vector": "generated"
+    },
+    "4": {
+     "ok": true,
+     "ms": 1.233,
+     "vector": "generated"
+    },
+    "5": {
+     "ok": true,
+     "ms": 1.227,
+     "vector": "generated"
+    },
+    "6": {
+     "ok": true,
+     "ms": 1.244,
+     "vector": "repo"
+    }
+   },
+   "size": {
+    "2": {
+     "constraints": 37140,
+     "domain": 65536,
+     "proof": 164,
+     "public": 588,
+     "pk": 6309223
+    },
+    "3": {
+     "constraints": 45252,
+     "domain": 65536,
+     "proof": 164,
+     "public": 844,
+     "pk": 7227605
+    },
+    "4": {
+     "constraints": 53364,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1100,
+     "pk": 8145987
+    },
+    "5": {
+     "constraints": 61476,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1356,
+     "pk": 9064369
+    },
+    "6": {
+     "constraints": 69588,
+     "domain": 131072,
+     "proof": 164,
+     "public": 1612,
+     "pk": 12079903
+    }
+   },
+   "cpus": 4,
+   "cpu": "Neoverse-N2",
+   "threads_per_core": 1,
+   "cores": 4,
+   "numcpu": 4,
+   "arch": "arm64",
+   "start": "2026-10-08 07:04:55 UTC",
+   "end": "2026-10-08 07:11:27 UTC"
+  },
+  "xeon_cloud": {
+   "file": "claude-cloud-x64-2vcpu-20261008.log",
+   "prove": {
+    "2": {
+     "1": {
+      "min": 771.0,
+      "median": 959.0,
+      "max": 1008.0,
+      "n": 20
+     },
+     "2": {
+      "min": 521.0,
+      "median": 633.0,
+      "max": 735.0,
+      "n": 20
+     }
+    },
+    "3": {
+     "1": {
+      "min": 971.0,
+      "median": 1144.0,
+      "max": 1365.0,
+      "n": 20
+     },
+     "2": {
+      "min": 666.0,
+      "median": 713.0,
+      "max": 823.0,
+      "n": 20
+     }
+    },
+    "4": {
+     "1": {
+      "min": 1094.0,
+      "median": 1268.0,
+      "max": 1518.0,
+      "n": 20
+     },
+     "2": {
+      "min": 770.0,
+      "median": 860.0,
+      "max": 1002.0,
+      "n": 20
+     }
+    },
+    "5": {
+     "1": {
+      "min": 1137.0,
+      "median": 1333.0,
+      "max": 1431.0,
+      "n": 20
+     },
+     "2": {
+      "min": 670.0,
+      "median": 821.0,
+      "max": 984.0,
+      "n": 20
+     }
+    },
+    "6": {
+     "1": {
+      "min": 1669.0,
+      "median": 1952.0,
+      "max": 2280.0,
+      "n": 20
+     },
+     "2": {
+      "min": 1071.0,
+      "median": 1369.0,
+      "max": 1513.0,
+      "n": 20
+     }
+    }
+   },
+   "keyload": {
+    "2": {
+     "ccs_first": 58.0,
+     "ccs_rest": 39.0,
+     "pk_first": 1762.0,
+     "pk_rest": 1654.0
+    },
+    "3": {
+     "ccs_first": 40.0,
+     "ccs_rest": 52.0,
+     "pk_first": 2021.9999999999998,
+     "pk_rest": 2047.0000000000002
+    },
+    "4": {
+     "ccs_first": 65.0,
+     "ccs_rest": 54.0,
+     "pk_first": 2149.0,
+     "pk_rest": 2408.0
+    },
+    "5": {
+     "ccs_first": 65.0,
+     "ccs_rest": 65.0,
+     "pk_first": 2824.0,
+     "pk_rest": 2632.0
+    },
+    "6": {
+     "ccs_first": 80.0,
+     "ccs_rest": 66.0,
+     "pk_first": 2936.0,
+     "pk_rest": 3040.0
+    }
+   },
+   "http": {
+    "2": {
+     "cold": 2293.139,
+     "median": 576.8290000000001,
+     "n": 10
+    },
+    "3": {
+     "cold": 2653.183,
+     "median": 647.089,
+     "n": 10
+    },
+    "4": {
+     "cold": 3096.702,
+     "median": 812.576,
+     "n": 10
+    },
+    "5": {
+     "cold": 3820.284,
+     "median": 797.4050000000001,
+     "n": 10
+    },
+    "6": {
+     "cold": 4119.358,
+     "median": 1303.48,
+     "n": 10
+    }
+   },
+   "verify": {
+    "2": {
+     "ok": true,
+     "ms": 1.066,
+     "vector": "repo"
+    },
+    "3": {
+     "ok": true,
+     "ms": 1.069,
+     "vector": "generated"
+    },
+    "4": {
+     "ok": true,
+     "ms": 1.666,
+     "vector": "generated"
+    },
+    "5": {
+     "ok": true,
+     "ms": 1.105,
+     "vector": "generated"
+    },
+    "6": {
+     "ok": true,
+     "ms": 1.284,
+     "vector": "repo"
+    }
+   },
+   "size": {
+    "2": {
+     "constraints": 37140,
+     "domain": 65536,
+     "proof": 164,
+     "public": 588,
+     "pk": 6309223
+    },
+    "3": {
+     "constraints": 45252,
+     "domain": 65536,
+     "proof": 164,
+     "public": 844,
+     "pk": 7227605
+    },
+    "4": {
+     "constraints": 53364,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1100,
+     "pk": 8145987
+    },
+    "5": {
+     "constraints": 61476,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1356,
+     "pk": 9064369
+    },
+    "6": {
+     "constraints": 69588,
+     "domain": 131072,
+     "proof": 164,
+     "public": 1612,
+     "pk": 12079903
+    }
+   },
+   "numcpu": 2,
+   "arch": "amd64",
+   "start": "2026-10-08 06:48:12 UTC",
+   "end": "2026-10-08 06:55:24 UTC",
+   "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+   "cpus": 2,
+   "threads_per_core": 1,
+   "cores": 2,
+   "topology_note": "lscpu read in the same container on 2026-10-08, not inside the logged session"
+  },
+  "amd_9v45_earlier": {
+   "file": "github-x64-run37740445393.log",
+   "prove": {
+    "2": {
+     "1": {
+      "min": 589.0,
+      "median": 605.0,
+      "max": 630.0,
+      "n": 20
+     },
+     "2": {
+      "min": 325.0,
+      "median": 339.0,
+      "max": 366.0,
+      "n": 20
+     },
+     "4": {
+      "min": 269.0,
+      "median": 288.0,
+      "max": 305.0,
+      "n": 20
+     }
+    },
+    "3": {
+     "1": {
+      "min": 743.0,
+      "median": 754.0,
+      "max": 785.0,
+      "n": 20
+     },
+     "2": {
+      "min": 409.0,
+      "median": 417.0,
+      "max": 441.0,
+      "n": 20
+     },
+     "4": {
+      "min": 333.0,
+      "median": 348.0,
+      "max": 366.0,
+      "n": 20
+     }
+    },
+    "4": {
+     "1": {
+      "min": 806.0,
+      "median": 812.0,
+      "max": 861.0,
+      "n": 20
+     },
+     "2": {
+      "min": 443.0,
+      "median": 451.0,
+      "max": 470.0,
+      "n": 20
+     },
+     "4": {
+      "min": 352.0,
+      "median": 375.0,
+      "max": 390.0,
+      "n": 20
+     }
+    },
+    "5": {
+     "1": {
+      "min": 874.0,
+      "median": 887.0,
+      "max": 913.0,
+      "n": 20
+     },
+     "2": {
+      "min": 468.0,
+      "median": 478.0,
+      "max": 502.0,
+      "n": 20
+     },
+     "4": {
+      "min": 375.0,
+      "median": 398.0,
+      "max": 421.0,
+      "n": 20
+     }
+    },
+    "6": {
+     "1": {
+      "min": 1210.0,
+      "median": 1230.0,
+      "max": 1278.0,
+      "n": 20
+     },
+     "2": {
+      "min": 636.0,
+      "median": 654.0,
+      "max": 672.0,
+      "n": 20
+     },
+     "4": {
+      "min": 523.0,
+      "median": 555.0,
+      "max": 599.0,
+      "n": 20
+     }
+    }
+   },
+   "keyload": {
+    "2": {
+     "ccs_first": 15.0,
+     "ccs_rest": 16.0,
+     "pk_first": 1043.0,
+     "pk_rest": 923.0
+    },
+    "3": {
+     "ccs_first": 21.0,
+     "ccs_rest": 20.0,
+     "pk_first": 1092.0,
+     "pk_rest": 1092.0
+    },
+    "4": {
+     "ccs_first": 22.0,
+     "ccs_rest": 24.0,
+     "pk_first": 1245.0,
+     "pk_rest": 1255.0
+    },
+    "5": {
+     "ccs_first": 27.0,
+     "ccs_rest": 27.0,
+     "pk_first": 1416.0,
+     "pk_rest": 1415.0
+    },
+    "6": {
+     "ccs_first": 31.0,
+     "ccs_rest": 30.0,
+     "pk_first": 1732.0,
+     "pk_rest": 1737.0
+    }
+   },
+   "http": {
+    "2": {
+     "cold": 1214.1599999999999,
+     "median": 281.383,
+     "n": 10
+    },
+    "3": {
+     "cold": 1440.499,
+     "median": 352.527,
+     "n": 10
+    },
+    "4": {
+     "cold": 1644.6309999999999,
+     "median": 368.029,
+     "n": 10
+    },
+    "5": {
+     "cold": 1817.7669999999998,
+     "median": 380.275,
+     "n": 10
+    },
+    "6": {
+     "cold": 2282.674,
+     "median": 538.4290000000001,
+     "n": 10
+    }
+   },
+   "verify": {
+    "2": {
+     "ok": true,
+     "ms": 0.628,
+     "vector": "repo"
+    },
+    "3": {
+     "ok": true,
+     "ms": 0.671,
+     "vector": "generated"
+    },
+    "4": {
+     "ok": true,
+     "ms": 0.689,
+     "vector": "generated"
+    },
+    "5": {
+     "ok": true,
+     "ms": 0.782,
+     "vector": "generated"
+    },
+    "6": {
+     "ok": true,
+     "ms": 0.832,
+     "vector": "repo"
+    }
+   },
+   "size": {
+    "2": {
+     "constraints": 37140,
+     "domain": 65536,
+     "proof": 164,
+     "public": 588,
+     "pk": 6309223
+    },
+    "3": {
+     "constraints": 45252,
+     "domain": 65536,
+     "proof": 164,
+     "public": 844,
+     "pk": 7227605
+    },
+    "4": {
+     "constraints": 53364,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1100,
+     "pk": 8145987
+    },
+    "5": {
+     "constraints": 61476,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1356,
+     "pk": 9064369
+    },
+    "6": {
+     "constraints": 69588,
+     "domain": 131072,
+     "proof": 164,
+     "public": 1612,
+     "pk": 12079903
+    }
+   },
+   "numcpu": 4,
+   "arch": "amd64",
+   "start": "2026-10-08 06:56:44 UTC",
+   "end": "2026-10-08 07:02:02 UTC",
+   "cpu": "AMD EPYC 9V45 96-Core Processor",
+   "cpus": 4,
+   "topology_note": "topology not recorded for this run"
+  },
+  "neoverse_n2_earlier": {
+   "file": "github-arm64-run37740445393.log",
+   "prove": {
+    "2": {
+     "1": {
+      "min": 887.0,
+      "median": 891.0,
+      "max": 895.0,
+      "n": 20
+     },
+     "2": {
+      "min": 487.0,
+      "median": 492.0,
+      "max": 496.0,
+      "n": 20
+     },
+     "4": {
+      "min": 297.0,
+      "median": 336.0,
+      "max": 352.0,
+      "n": 20
+     }
+    },
+    "3": {
+     "1": {
+      "min": 1102.0,
+      "median": 1108.0,
+      "max": 1116.0,
+      "n": 20
+     },
+     "2": {
+      "min": 607.0,
+      "median": 610.0,
+      "max": 614.0,
+      "n": 20
+     },
+     "4": {
+      "min": 365.0,
+      "median": 402.0,
+      "max": 430.0,
+      "n": 20
+     }
+    },
+    "4": {
+     "1": {
+      "min": 1212.0,
+      "median": 1219.0,
+      "max": 1224.0,
+      "n": 20
+     },
+     "2": {
+      "min": 664.0,
+      "median": 668.0,
+      "max": 679.0,
+      "n": 20
+     },
+     "4": {
+      "min": 399.0,
+      "median": 420.0,
+      "max": 441.0,
+      "n": 20
+     }
+    },
+    "5": {
+     "1": {
+      "min": 1303.0,
+      "median": 1310.0,
+      "max": 1327.0,
+      "n": 20
+     },
+     "2": {
+      "min": 694.0,
+      "median": 698.0,
+      "max": 712.0,
+      "n": 20
+     },
+     "4": {
+      "min": 412.0,
+      "median": 442.0,
+      "max": 470.0,
+      "n": 20
+     }
+    },
+    "6": {
+     "1": {
+      "min": 1823.0,
+      "median": 1831.0,
+      "max": 1840.0,
+      "n": 20
+     },
+     "2": {
+      "min": 956.0,
+      "median": 962.0,
+      "max": 972.0,
+      "n": 20
+     },
+     "4": {
+      "min": 589.0,
+      "median": 622.0,
+      "max": 663.0,
+      "n": 20
+     }
+    }
+   },
+   "keyload": {
+    "2": {
+     "ccs_first": 29.0,
+     "ccs_rest": 26.0,
+     "pk_first": 1043.0,
+     "pk_rest": 1035.0
+    },
+    "3": {
+     "ccs_first": 29.0,
+     "ccs_rest": 29.0,
+     "pk_first": 1229.0,
+     "pk_rest": 1233.0
+    },
+    "4": {
+     "ccs_first": 37.0,
+     "ccs_rest": 37.0,
+     "pk_first": 1424.0,
+     "pk_rest": 1425.0
+    },
+    "5": {
+     "ccs_first": 43.0,
+     "ccs_rest": 41.0,
+     "pk_first": 1619.0,
+     "pk_rest": 1635.0
+    },
+    "6": {
+     "ccs_first": 49.0,
+     "ccs_rest": 45.0,
+     "pk_first": 1974.0,
+     "pk_rest": 1949.0
+    }
+   },
+   "http": {
+    "2": {
+     "cold": 1695.859,
+     "median": 343.02700000000004,
+     "n": 10
+    },
+    "3": {
+     "cold": 1679.295,
+     "median": 391.54299999999995,
+     "n": 10
+    },
+    "4": {
+     "cold": 1888.9640000000002,
+     "median": 420.973,
+     "n": 10
+    },
+    "5": {
+     "cold": 2117.581,
+     "median": 435.71900000000005,
+     "n": 10
+    },
+    "6": {
+     "cold": 2566.206,
+     "median": 609.834,
+     "n": 10
+    }
+   },
+   "verify": {
+    "2": {
+     "ok": true,
+     "ms": 1.164,
+     "vector": "repo"
+    },
+    "3": {
+     "ok": true,
+     "ms": 1.175,
+     "vector": "generated"
+    },
+    "4": {
+     "ok": true,
+     "ms": 1.229,
+     "vector": "generated"
+    },
+    "5": {
+     "ok": true,
+     "ms": 1.211,
+     "vector": "generated"
+    },
+    "6": {
+     "ok": true,
+     "ms": 1.273,
+     "vector": "repo"
+    }
+   },
+   "size": {
+    "2": {
+     "constraints": 37140,
+     "domain": 65536,
+     "proof": 164,
+     "public": 588,
+     "pk": 6309223
+    },
+    "3": {
+     "constraints": 45252,
+     "domain": 65536,
+     "proof": 164,
+     "public": 844,
+     "pk": 7227605
+    },
+    "4": {
+     "constraints": 53364,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1100,
+     "pk": 8145987
+    },
+    "5": {
+     "constraints": 61476,
+     "domain": 65536,
+     "proof": 164,
+     "public": 1356,
+     "pk": 9064369
+    },
+    "6": {
+     "constraints": 69588,
+     "domain": 131072,
+     "proof": 164,
+     "public": 1612,
+     "pk": 12079903
+    }
+   },
+   "numcpu": 4,
+   "arch": "arm64",
+   "start": "2026-10-08 06:56:47 UTC",
+   "end": "2026-10-08 07:03:27 UTC",
+   "cpu": "0xd49",
+   "cpus": 4
+  }
+ },
+ "derived": {
+  "intel_8573c": {
+   "k6_median": {
+    "1": 1548.0,
+    "2": 824.0,
+    "4": 707.0
+   },
+   "speedup_1_2": 1.8786407766990292,
+   "speedup_2_4": 1.1654879773691655,
+   "speedup_1_4": 2.1895332390381896,
+   "step56_1c": 451.0,
+   "avg_step_2to5_1c": 114.0,
+   "step_ratio": 3.956140350877193,
+   "cold6": 2842.416,
+   "pk6": 2071.0,
+   "http6": 699.121,
+   "cold_minus_parts": 22.295000000000186,
+   "verify6": 0.976,
+   "proofs_per_s_allcores": 1.4144271570014144,
+   "chaps_machines": 3.4447102083333334,
+   "fedwire_machines": 7.759030416666667,
+   "top_cores": "4"
+  },
+  "neoverse_n2": {
+   "k6_median": {
+    "1": 1807.0,
+    "2": 954.0,
+    "4": 633.0
+   },
+   "speedup_1_2": 1.8941299790356394,
+   "speedup_2_4": 1.5071090047393365,
+   "speedup_1_4": 2.854660347551343,
+   "step56_1c": 506.0,
+   "avg_step_2to5_1c": 142.66666666666666,
+   "step_ratio": 3.546728971962617,
+   "cold6": 2618.228,
+   "pk6": 1941.0,
+   "http6": 615.826,
+   "cold_minus_parts": 12.402000000000044,
+   "verify6": 1.244,
+   "proofs_per_s_allcores": 1.5797788309636651,
+   "chaps_machines": 3.084160625,
+   "fedwire_machines": 6.94691125,
+   "top_cores": "4"
+  },
+  "xeon_cloud": {
+   "k6_median": {
+    "1": 1952.0,
+    "2": 1369.0
+   },
+   "speedup_1_2": 1.4258582907231556,
+   "speedup_2_4": null,
+   "speedup_1_4": null,
+   "step56_1c": 619.0,
+   "avg_step_2to5_1c": 124.66666666666667,
+   "step_ratio": 4.96524064171123,
+   "cold6": 4119.358,
+   "pk6": 2936.0,
+   "http6": 1303.48,
+   "cold_minus_parts": -200.12199999999984,
+   "verify6": 1.284,
+   "proofs_per_s_allcores": 0.7304601899196493,
+   "chaps_machines": 6.670167291666667,
+   "fedwire_machines": 15.024204583333335,
+   "top_cores": "2"
+  },
+  "amd_9v45_earlier": {
+   "k6_median": {
+    "1": 1230.0,
+    "2": 654.0,
+    "4": 555.0
+   },
+   "speedup_1_2": 1.8807339449541285,
+   "speedup_2_4": 1.1783783783783783,
+   "speedup_1_4": 2.2162162162162162,
+   "step56_1c": 343.0,
+   "avg_step_2to5_1c": 94.0,
+   "step_ratio": 3.648936170212766,
+   "cold6": 2282.674,
+   "pk6": 1732.0,
+   "http6": 538.4290000000001,
+   "cold_minus_parts": -18.75500000000011,
+   "verify6": 0.832,
+   "proofs_per_s_allcores": 1.8018018018018018,
+   "chaps_machines": 2.704121875,
+   "fedwire_machines": 6.09089375,
+   "top_cores": "4"
+  },
+  "neoverse_n2_earlier": {
+   "k6_median": {
+    "1": 1831.0,
+    "2": 962.0,
+    "4": 622.0
+   },
+   "speedup_1_2": 1.9033264033264032,
+   "speedup_2_4": 1.5466237942122187,
+   "speedup_1_4": 2.9437299035369775,
+   "step56_1c": 521.0,
+   "avg_step_2to5_1c": 139.66666666666666,
+   "step_ratio": 3.730310262529833,
+   "cold6": 2566.206,
+   "pk6": 1974.0,
+   "http6": 609.834,
+   "cold_minus_parts": -66.62799999999982,
+   "verify6": 1.273,
+   "proofs_per_s_allcores": 1.607717041800643,
+   "chaps_machines": 3.0305654166666667,
+   "fedwire_machines": 6.826190833333333,
+   "top_cores": "4"
+  }
+ },
+ "denominators": {
+  "chaps_per_s": 4.8722916666666665,
+  "fedwire_per_s": 10.974583333333333,
+  "chaps_src": "BoE FY2025 ADV 210,483 over 06:00-18:00",
+  "fedwire_src": "Fed 2025 ADV 869,187 over 22h"
+ }
+}

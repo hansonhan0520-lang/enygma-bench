@@ -36,4 +36,18 @@ Every push to `main` that touches the harness, and every manual run from the Act
 
 ## Results
 
-See `results/` and the Actions runs. Figures quoted in articles name the run they came from.
+Transfer circuit, anonymity set k=6, median of 20 proofs per configuration. GitHub figures are from Actions run [37741247183](https://github.com/hansonhan0520-lang/enygma-bench/actions/runs/37741247183) on 2026-10-08; the cloud VM figures are from a local run the same day. Every figure is parsed from the logs into [`data/bench_data.json`](data/bench_data.json), which is the single source for the article that cites this repository.
+
+| Machine | k=6, 1 vCPU | 2 vCPU | 4 vCPU | 2→4 vCPU speedup | verify | proving-key load | cold HTTP request | warm HTTP request | Log |
+|---|---|---|---|---|---|---|---|---|---|
+| GitHub x64 (`ubuntu-24.04`), Intel Xeon Platinum 8573C, 2 cores × 2 threads | 1.55 s | 0.82 s | 0.71 s | 1.17× | 0.98 ms | 2.07 s | 2.84 s | 0.70 s | [log](results/github-x64-run37741247183.log) |
+| GitHub arm64 (`ubuntu-24.04-arm`), ARM Neoverse-N2, 4 cores × 1 thread | 1.81 s | 0.95 s | 0.63 s | 1.51× | 1.24 ms | 1.94 s | 2.62 s | 0.62 s | [log](results/github-arm64-run37741247183.log) |
+| Cloud VM, Intel Xeon @ 2.10GHz, 2 cores × 1 thread | 1.95 s | 1.37 s | n/a | n/a | 1.28 ms | 2.94 s | 4.12 s | 1.30 s | [log](results/claude-cloud-x64-2vcpu-20261008.log) |
+
+CPU topology comes from `lscpu` at the top of each log (the cloud VM's was read in the same container, since that log predates the `lscpu` line). An earlier Actions run, [37740445393](https://github.com/hansonhan0520-lang/enygma-bench/actions/runs/37740445393), received an AMD EPYC 9V45 on the same x64 runner label; its logs are kept in `results/` but its topology was not recorded.
+
+Notes on reading these numbers:
+
+- The proving-key load is what the service does once per k on its first request. Load time plus one warm request comes within 22 ms, 12 ms and 0.2 s of the measured cold request on the three machines.
+- Constraint count, evaluation domain, proof size (164 B) and public-witness size are identical on every machine and both architectures: the k=5 to k=6 cost step (65,536 to 131,072 evaluation domain) comes from the circuit, not the CPU.
+- These are proof-generation timings for one circuit with requests handled one at a time. They are not end-to-end settlement throughput.
