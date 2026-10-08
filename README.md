@@ -46,6 +46,16 @@ Transfer circuit, anonymity set k=6, median of 20 proofs per configuration. GitH
 
 CPU topology comes from `lscpu` at the top of each log (the cloud VM's was read in the same container, since that log predates the `lscpu` line). An earlier Actions run, [37740445393](https://github.com/hansonhan0520-lang/enygma-bench/actions/runs/37740445393), received an AMD EPYC 9V45 on the same x64 runner label; its logs are kept in `results/` but its topology was not recorded.
 
+### Community runs
+
+Runs reported by other people using this harness. They are listed as reported; the logs are not in this repository.
+
+| Who | Machine | k=6, 1 vCPU | 2 vCPU | 4 vCPU | 2→4 vCPU speedup | Runs |
+|---|---|---|---|---|---|---|
+| turrizt (Rayls Discord), 2026-10-08 | Contabo VPS, AMD EPYC (with IBPB), 6 vCPU, guest `lscpu`: 6 cores × 1 thread, QEMU, shared with other services | 2.41 s | 1.28 s | 0.97 s | 1.32× | 10 per configuration; proof, verification and invalid-input tests all passed |
+
+This run qualifies the topology reading above. The guest reports one thread per core, yet 2 to 4 vCPU gave 1.32×, below the ARM runner's 1.51×. Inside a virtual machine `lscpu` shows the guest topology, not how the host maps vCPUs onto physical cores and hyperthreads, and this VPS was also running other services. So guest topology is a hint about scaling, not a measurement of its cause.
+
 Notes on reading these numbers:
 
 - The proving-key load is what the service does once per k on its first request. Load time plus one warm request comes within 22 ms, 12 ms and 0.2 s of the measured cold request on the three machines.
