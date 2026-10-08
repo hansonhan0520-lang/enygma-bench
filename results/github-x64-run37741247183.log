@@ -1,0 +1,102 @@
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'; git rev-parse HEAD; nproc; uname -m; go version
+2026-10-08 07:04:55 UTC
+67c4c26696016b48e70950e284ae1a51b7d0cf0e
+4
+x86_64
+go version go1.26.8 linux/amd64
+$ lscpu | grep -E '^CPU\(s\)|Model name|Thread\(s\) per core|Core\(s\) per socket|Socket\(s\)|Vendor ID' || true
+CPU(s):                                  4
+Vendor ID:                               GenuineIntel
+Model name:                              INTEL(R) XEON(R) PLATINUM 8573C
+Thread(s) per core:                      2
+Core(s) per socket:                      2
+Socket(s):                               1
+CPU(s) scaling MHz:                      155%
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run 'TestGeneratorReproducesPublishedVectors|TestGenerateMidVectors' -count=1 -v | grep RESULT
+go: downloading github.com/consensys/gnark v0.14.0
+go: downloading github.com/consensys/gnark-crypto v0.19.2
+go: downloading github.com/gin-gonic/gin v1.11.0
+go: downloading github.com/iden3/go-iden3-crypto v0.0.17
+go: downloading golang.org/x/crypto v0.49.0
+go: downloading github.com/blang/semver/v4 v4.0.0
+go: downloading github.com/fxamacker/cbor/v2 v2.9.0
+go: downloading golang.org/x/sync v0.20.0
+go: downloading github.com/gin-contrib/sse v1.1.0
+go: downloading github.com/mattn/go-isatty v0.0.20
+go: downloading github.com/quic-go/quic-go v0.59.0
+go: downloading golang.org/x/net v0.52.0
+go: downloading github.com/dchest/blake512 v1.0.0
+go: downloading github.com/bits-and-blooms/bitset v1.24.4
+go: downloading github.com/rs/zerolog v1.34.0
+go: downloading golang.org/x/sys v0.42.0
+go: downloading github.com/ronanh/intcomp v1.1.1
+go: downloading github.com/google/pprof v0.0.0-20260115054156-294ebfa9ad83
+go: downloading github.com/x448/float16 v0.8.4
+go: downloading github.com/go-playground/validator/v10 v10.30.1
+go: downloading github.com/goccy/go-yaml v1.19.2
+go: downloading github.com/pelletier/go-toml/v2 v2.2.4
+go: downloading github.com/ugorji/go/codec v1.3.1
+go: downloading google.golang.org/protobuf v1.36.11
+go: downloading github.com/quic-go/qpack v0.6.0
+go: downloading github.com/mattn/go-colorable v0.1.14
+go: downloading github.com/gabriel-vasile/mimetype v1.4.12
+go: downloading github.com/go-playground/universal-translator v0.18.1
+go: downloading github.com/leodido/go-urn v1.4.0
+go: downloading golang.org/x/text v0.35.0
+go: downloading github.com/go-playground/locales v0.14.1
+RESULT regenerate /home/runner/work/enygma-bench/enygma-bench/work/vectors/k6.json k=6 all_fields_match=true
+RESULT regenerate /home/runner/work/enygma-bench/enygma-bench/work/vectors/k2.json k=2 all_fields_match=true
+RESULT generated k=3 participants=3 sender_tx_value=10
+RESULT generated k=4 participants=4 sender_tx_value=10
+RESULT generated k=5 participants=5 sender_tx_value=10
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestSetupArtifacts -count=1 -v -timeout 60m | grep RESULT
+RESULT artifacts k=2 constraints=37140 compile=369ms setup=4.157s
+RESULT artifacts k=3 constraints=45252 compile=428ms setup=4.349s
+RESULT artifacts k=4 constraints=53364 compile=511ms setup=4.919s
+RESULT artifacts k=5 constraints=61476 compile=578ms setup=5.486s
+RESULT artifacts k=6 constraints=69588 compile=653ms setup=7.3s
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestProveAcrossK -count=1 -v -timeout 120m | grep RESULT
+RESULT env NumCPU=4 arch=amd64 go=go1.26.8 cpu="INTEL(R) XEON(R) PLATINUM 8573C"
+RESULT verify k=2 vector=repo ok=true verify=788µs
+RESULT prove k=2 cores=1 n=20 min=747ms median=755ms max=768ms
+RESULT prove k=2 cores=2 n=20 min=415ms median=420ms max=427ms
+RESULT prove k=2 cores=4 n=20 min=336ms median=356ms max=368ms
+RESULT verify k=3 vector=generated ok=true verify=893µs
+RESULT prove k=3 cores=1 n=20 min=930ms median=935ms max=937ms
+RESULT prove k=3 cores=2 n=20 min=514ms median=519ms max=528ms
+RESULT prove k=3 cores=4 n=20 min=410ms median=432ms max=451ms
+RESULT verify k=4 vector=generated ok=true verify=906µs
+RESULT prove k=4 cores=1 n=20 min=1.015s median=1.02s max=1.058s
+RESULT prove k=4 cores=2 n=20 min=562ms median=568ms max=596ms
+RESULT prove k=4 cores=4 n=20 min=450ms median=474ms max=488ms
+RESULT verify k=5 vector=generated ok=true verify=892µs
+RESULT prove k=5 cores=1 n=20 min=1.091s median=1.097s max=1.138s
+RESULT prove k=5 cores=2 n=20 min=587ms median=594ms max=612ms
+RESULT prove k=5 cores=4 n=20 min=472ms median=492ms max=507ms
+RESULT verify k=6 vector=repo ok=true verify=976µs
+RESULT prove k=6 cores=1 n=20 min=1.537s median=1.548s max=1.59s
+RESULT prove k=6 cores=2 n=20 min=815ms median=824ms max=839ms
+RESULT prove k=6 cores=4 n=20 min=675ms median=707ms max=722ms
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestRejectsBadVectors -count=1 -v | grep RESULT | cut -c1-110
+RESULT bad_vector k=2 refused=true err=constraint #517 is not satisfied: 1 ⋅ 10 != 0
+RESULT bad_vector k=6 refused=true err=constraint #1085 is not satisfied: 1 ⋅ 200731270599462037280821479596
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestSizes -count=1 -v | grep RESULT
+RESULT size k=2 constraints=37140 domain=65536 proof=164B public=588B pk=6309223B
+RESULT size k=3 constraints=45252 domain=65536 proof=164B public=844B pk=7227605B
+RESULT size k=4 constraints=53364 domain=65536 proof=164B public=1100B pk=8145987B
+RESULT size k=5 constraints=61476 domain=65536 proof=164B public=1356B pk=9064369B
+RESULT size k=6 constraints=69588 domain=131072 proof=164B public=1612B pk=12079903B
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestKeyLoad -count=1 -v | grep RESULT
+RESULT keyload k=2 ccs_first=25ms ccs_rest=24ms pk_first=1.103s pk_rest=1.13s
+RESULT keyload k=3 ccs_first=31ms ccs_rest=32ms pk_first=1.302s pk_rest=1.314s
+RESULT keyload k=4 ccs_first=37ms ccs_rest=37ms pk_first=1.506s pk_rest=1.506s
+RESULT keyload k=5 ccs_first=44ms ccs_rest=44ms pk_first=1.708s pk_rest=1.711s
+RESULT keyload k=6 ccs_first=50ms ccs_rest=49ms pk_first=2.071s pk_rest=2.07s
+$ for k in 2..6: one cold request, then 10 timed requests; report median
+RESULT http k=2 cold=1.517123s median=0.354704s n=10
+RESULT http k=3 cold=1.770228s median=0.419747s n=10
+RESULT http k=4 cold=2.025228s median=0.469641s n=10
+RESULT http k=5 cold=2.271466s median=0.487473s n=10
+RESULT http k=6 cold=2.842416s median=0.699121s n=10
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'
+2026-10-08 07:11:26 UTC
