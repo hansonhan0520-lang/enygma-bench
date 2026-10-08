@@ -1,0 +1,58 @@
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'; git rev-parse HEAD; nproc; uname -m; go version
+2026-10-08 06:48:12 UTC
+67c4c26696016b48e70950e284ae1a51b7d0cf0e
+2
+x86_64
+go version go1.26.8 linux/amd64
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run 'TestGeneratorReproducesPublishedVectors|TestGenerateMidVectors' -count=1 -v | grep RESULT
+RESULT regenerate /home/claude/bench/enygma-bench/work/vectors/k6.json k=6 all_fields_match=true
+RESULT regenerate /home/claude/bench/enygma-bench/work/vectors/k2.json k=2 all_fields_match=true
+RESULT generated k=3 participants=3 sender_tx_value=10
+RESULT generated k=4 participants=4 sender_tx_value=10
+RESULT generated k=5 participants=5 sender_tx_value=10
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestSetupArtifacts -count=1 -v -timeout 60m | grep RESULT
+RESULT artifacts k=2 constraints=37140 compile=864ms setup=6.385s
+RESULT artifacts k=3 constraints=45252 compile=780ms setup=7.071s
+RESULT artifacts k=4 constraints=53364 compile=906ms setup=7.303s
+RESULT artifacts k=5 constraints=61476 compile=990ms setup=9.098s
+RESULT artifacts k=6 constraints=69588 compile=1.143s setup=11.868s
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestProveAcrossK -count=1 -v -timeout 120m | grep RESULT
+RESULT env NumCPU=2 arch=amd64 go=go1.26.8 cpu="Intel(R) Xeon(R) Processor @ 2.10GHz"
+RESULT verify k=2 vector=repo ok=true verify=1.066ms
+RESULT prove k=2 cores=1 n=20 min=771ms median=959ms max=1.008s
+RESULT prove k=2 cores=2 n=20 min=521ms median=633ms max=735ms
+RESULT verify k=3 vector=generated ok=true verify=1.069ms
+RESULT prove k=3 cores=1 n=20 min=971ms median=1.144s max=1.365s
+RESULT prove k=3 cores=2 n=20 min=666ms median=713ms max=823ms
+RESULT verify k=4 vector=generated ok=true verify=1.666ms
+RESULT prove k=4 cores=1 n=20 min=1.094s median=1.268s max=1.518s
+RESULT prove k=4 cores=2 n=20 min=770ms median=860ms max=1.002s
+RESULT verify k=5 vector=generated ok=true verify=1.105ms
+RESULT prove k=5 cores=1 n=20 min=1.137s median=1.333s max=1.431s
+RESULT prove k=5 cores=2 n=20 min=670ms median=821ms max=984ms
+RESULT verify k=6 vector=repo ok=true verify=1.284ms
+RESULT prove k=6 cores=1 n=20 min=1.669s median=1.952s max=2.28s
+RESULT prove k=6 cores=2 n=20 min=1.071s median=1.369s max=1.513s
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestRejectsBadVectors -count=1 -v | grep RESULT | cut -c1-110
+RESULT bad_vector k=2 refused=true err=constraint #517 is not satisfied: 1 ⋅ 10 != 0
+RESULT bad_vector k=6 refused=true err=constraint #1085 is not satisfied: 1 ⋅ 200731270599462037280821479596
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestSizes -count=1 -v | grep RESULT
+RESULT size k=2 constraints=37140 domain=65536 proof=164B public=588B pk=6309223B
+RESULT size k=3 constraints=45252 domain=65536 proof=164B public=844B pk=7227605B
+RESULT size k=4 constraints=53364 domain=65536 proof=164B public=1100B pk=8145987B
+RESULT size k=5 constraints=61476 domain=65536 proof=164B public=1356B pk=9064369B
+RESULT size k=6 constraints=69588 domain=131072 proof=164B public=1612B pk=12079903B
+$ go test ./pkg/circuits/enygma/enygma-payments/enygma-transfer/ -run TestKeyLoad -count=1 -v | grep RESULT
+RESULT keyload k=2 ccs_first=58ms ccs_rest=39ms pk_first=1.762s pk_rest=1.654s
+RESULT keyload k=3 ccs_first=40ms ccs_rest=52ms pk_first=2.022s pk_rest=2.047s
+RESULT keyload k=4 ccs_first=65ms ccs_rest=54ms pk_first=2.149s pk_rest=2.408s
+RESULT keyload k=5 ccs_first=65ms ccs_rest=65ms pk_first=2.824s pk_rest=2.632s
+RESULT keyload k=6 ccs_first=80ms ccs_rest=66ms pk_first=2.936s pk_rest=3.04s
+$ for k in 2..6: one cold request, then 10 timed requests; report median
+RESULT http k=2 cold=2.293139s median=0.576829s n=10
+RESULT http k=3 cold=2.653183s median=0.647089s n=10
+RESULT http k=4 cold=3.096702s median=0.812576s n=10
+RESULT http k=5 cold=3.820284s median=0.797405s n=10
+RESULT http k=6 cold=4.119358s median=1.303480s n=10
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'
+2026-10-08 06:55:24 UTC

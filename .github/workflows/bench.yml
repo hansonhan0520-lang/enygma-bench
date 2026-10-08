@@ -10,6 +10,9 @@ on:
     branches: [main]
     paths: ["harness/**", "run.sh", "extract_vectors.py", ".github/workflows/bench.yml"]
 
+permissions:
+  contents: write
+
 jobs:
   bench:
     strategy:
@@ -37,9 +40,19 @@ jobs:
           BENCH_PROCS: "1,2,4"
           BENCH_RUNS: ${{ github.event.inputs.bench_runs || '20' }}
           HTTP_RUNS: "10"
-          LABEL: ${{ matrix.label }}
+          LABEL: ${{ matrix.label }}-run${{ github.run_id }}
         run: ./run.sh
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.label }}-log
-          path: results/${{ matrix.label }}.log
+          path: results/${{ matrix.label }}-run${{ github.run_id }}.log
+      - name: Commit the log to results/
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "results/${{ matrix.label }}-run${{ github.run_id }}.log"
+          git commit -m "results: ${{ matrix.label }} from Actions run ${{ github.run_id }}"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep $((RANDOM % 10 + 5))
+          done
