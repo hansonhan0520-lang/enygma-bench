@@ -67,6 +67,32 @@ Runs reported by other people using this harness. They are listed as reported; t
 
 This run qualifies the topology reading above. The guest reports one thread per core, yet 2 to 4 vCPU gave 1.32×, below the ARM runner's 1.51×. Inside a virtual machine `lscpu` shows the guest topology, not how the host maps vCPUs onto physical cores and hyperthreads, and this VPS was also running other services. So guest topology is a hint about scaling, not a measurement of its cause.
 
+### Load and pinning results
+
+Actions run [39977915567](https://github.com/hansonhan0520-lang/enygma-bench/actions/runs/39977915567), 2026-10-23, four independently provisioned 4 vCPU runners, k=6 transfer proof through the unmodified HTTP service. 4,671 requests, 0 errors. Parsed figures: [`data/load_data.json`](data/load_data.json).
+
+Throughput by requests in flight (closed loop, 60 s each after a 5 s warm-up):
+
+| Machine | 1 in flight | 2 | 4 | 8 | 16 | p50 at 1 → 16 | p99 at 16 | peak RSS at 1 → 16 | 5-min run, 4 in flight | Log |
+|---|---|---|---|---|---|---|---|---|---|---|
+| ARM Neoverse-N2 (arm64, a) | 1.58/s | 2.08/s | 2.14/s | 2.06/s | 2.05/s | 0.63 s → 7.10 s | 11.33 s | 254 → 718 MB | 2.15/s, windows 2.03 to 2.23/s, 0 errors | [log](results/load-arm64-a-run39977915567.log) |
+| ARM Neoverse-N2 (arm64, b) | 1.59/s | 2.09/s | 2.12/s | 2.07/s | 2.02/s | 0.62 s → 7.25 s | 10.00 s | 258 → 726 MB | 2.17/s, windows 2.13 to 2.23/s, 0 errors | [log](results/load-arm64-b-run39977915567.log) |
+| AMD EPYC 9V45 (x64, a) | 1.93/s | 2.27/s | 2.31/s | 2.23/s | 2.16/s | 0.52 s → 6.70 s | 11.55 s | 264 → 682 MB | 2.29/s, windows 2.13 to 2.37/s, 0 errors | [log](results/load-x64-a-run39977915567.log) |
+| AMD EPYC 7763 (x64, b) | 1.16/s | 1.31/s | 1.34/s | 1.33/s | 1.20/s | 0.86 s → 11.81 s | 13.91 s | 269 → 747 MB | 1.35/s, windows 1.30 to 1.43/s, 0 errors | [log](results/load-x64-b-run39977915567.log) |
+
+At 16 in flight the service's own `Prove` timing is within 3% of the client-measured latency on every machine: requests are not queued at the door, they all start proving at once and share the CPUs. The service has no concurrency limit.
+
+CPU pinning with `taskset`, k=6 proof, median of 20 proofs per condition, median of 3 alternating rounds (speedup against 1 CPU):
+
+| Machine | guest topology | 1 CPU | 2 CPUs, same core | 2 CPUs, different cores | all 4 |
+|---|---|---|---|---|---|
+| ARM Neoverse-N2 (arm64, a) | 4 cores × 1 threads | 1.83 s | n/a (no SMT) | 1.16 s (1.58×) | 0.63 s (2.92×) |
+| ARM Neoverse-N2 (arm64, b) | 4 cores × 1 threads | 1.83 s | n/a (no SMT) | 1.23 s (1.49×) | 0.63 s (2.89×) |
+| AMD EPYC 9V45 (x64, a) | 2 cores × 2 threads | 1.17 s | 0.99 s (1.18×) | 0.74 s (1.57×) | 0.52 s (2.24×) |
+| AMD EPYC 7763 (x64, b) | 2 cores × 2 threads | 1.80 s | 1.64 s (1.10×) | 1.17 s (1.53×) | 0.85 s (2.11×) |
+
+Pinned figures compare conditions on one machine. Two pinned CPUs gave about 1.5×, below the 1.9× seen earlier with `GOMAXPROCS=2` and no pinning; the cause was not isolated. Topology is the guest's view, not the host's allocation.
+
 Notes on reading these numbers:
 
 - The proving-key load is what the service does once per k on its first request. Load time plus one warm request comes within 22 ms, 12 ms and 0.2 s of the measured cold request on the three machines.
