@@ -86,8 +86,8 @@ CPU pinning with `taskset`, k=6 proof, median of 20 proofs per condition, median
 
 | Machine | guest topology | 1 CPU | 2 CPUs, same core | 2 CPUs, different cores | all 4 |
 |---|---|---|---|---|---|
-| ARM Neoverse-N2 (arm64, a) | 4 cores × 1 threads | 1.83 s | n/a (no SMT) | 1.16 s (1.58×) | 0.63 s (2.92×) |
-| ARM Neoverse-N2 (arm64, b) | 4 cores × 1 threads | 1.83 s | n/a (no SMT) | 1.23 s (1.49×) | 0.63 s (2.89×) |
+| ARM Neoverse-N2 (arm64, a) | 4 cores × 1 thread | 1.83 s | n/a (no SMT) | 1.16 s (1.58×) | 0.63 s (2.92×) |
+| ARM Neoverse-N2 (arm64, b) | 4 cores × 1 thread | 1.83 s | n/a (no SMT) | 1.23 s (1.49×) | 0.63 s (2.89×) |
 | AMD EPYC 9V45 (x64, a) | 2 cores × 2 threads | 1.17 s | 0.99 s (1.18×) | 0.74 s (1.57×) | 0.52 s (2.24×) |
 | AMD EPYC 7763 (x64, b) | 2 cores × 2 threads | 1.80 s | 1.64 s (1.10×) | 1.17 s (1.53×) | 0.85 s (2.11×) |
 
