@@ -1,0 +1,104 @@
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'; git rev-parse HEAD; nproc; uname -m; go version
+2026-10-23 15:24:18 UTC
+67c4c26696016b48e70950e284ae1a51b7d0cf0e
+4
+x86_64
+go version go1.26.8 linux/amd64
+$ lscpu | grep -E '^CPU\(s\)|Model name|Thread\(s\) per core|Core\(s\) per socket|Socket\(s\)|Vendor ID|Hypervisor vendor|Virtualization type' || true
+CPU(s):                                  4
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD EPYC 9V45 96-Core Processor
+Thread(s) per core:                      2
+Core(s) per socket:                      2
+Socket(s):                               1
+Hypervisor vendor:                       Microsoft
+Virtualization type:                     full
+$ grep -E 'MemTotal' /proc/meminfo
+MemTotal:       16373444 kB
+$ guest topology from /sys/devices/system/cpu (guest view, not host allocation)
+TOPO cpu0 package=0 core=0 siblings=0-1
+TOPO cpu1 package=0 core=0 siblings=0-1
+TOPO cpu2 package=0 core=1 siblings=2-3
+TOPO cpu3 package=0 core=1 siblings=2-3
+SETS one=0 same_core=0,1 diff_core=0,2 all=0,1,2,3
+go: downloading github.com/consensys/gnark v0.14.0
+go: downloading github.com/consensys/gnark-crypto v0.19.2
+go: downloading github.com/gin-gonic/gin v1.11.0
+go: downloading github.com/iden3/go-iden3-crypto v0.0.17
+go: downloading golang.org/x/crypto v0.49.0
+go: downloading github.com/blang/semver/v4 v4.0.0
+go: downloading github.com/fxamacker/cbor/v2 v2.9.0
+go: downloading golang.org/x/sync v0.20.0
+go: downloading github.com/bits-and-blooms/bitset v1.24.4
+go: downloading github.com/rs/zerolog v1.34.0
+go: downloading github.com/gin-contrib/sse v1.1.0
+go: downloading github.com/mattn/go-isatty v0.0.20
+go: downloading github.com/quic-go/quic-go v0.59.0
+go: downloading golang.org/x/net v0.52.0
+go: downloading github.com/dchest/blake512 v1.0.0
+go: downloading github.com/ronanh/intcomp v1.1.1
+go: downloading github.com/google/pprof v0.0.0-20260115054156-294ebfa9ad83
+go: downloading golang.org/x/sys v0.42.0
+go: downloading github.com/x448/float16 v0.8.4
+go: downloading github.com/go-playground/validator/v10 v10.30.1
+go: downloading github.com/goccy/go-yaml v1.19.2
+go: downloading github.com/pelletier/go-toml/v2 v2.2.4
+go: downloading github.com/ugorji/go/codec v1.3.1
+go: downloading google.golang.org/protobuf v1.36.11
+go: downloading github.com/mattn/go-colorable v0.1.14
+go: downloading github.com/quic-go/qpack v0.6.0
+go: downloading github.com/gabriel-vasile/mimetype v1.4.12
+go: downloading github.com/go-playground/universal-translator v0.18.1
+go: downloading github.com/leodido/go-urn v1.4.0
+go: downloading golang.org/x/text v0.35.0
+go: downloading github.com/go-playground/locales v0.14.1
+RESULT regenerate /home/runner/work/enygma-bench/enygma-bench/work/vectors/k6.json k=6 all_fields_match=true
+RESULT regenerate /home/runner/work/enygma-bench/enygma-bench/work/vectors/k2.json k=2 all_fields_match=true
+RESULT generated k=3 participants=3 sender_tx_value=10
+RESULT generated k=4 participants=4 sender_tx_value=10
+RESULT generated k=5 participants=5 sender_tx_value=10
+RESULT artifacts k=2 constraints=37140 compile=299ms setup=2.924s
+RESULT artifacts k=3 constraints=45252 compile=339ms setup=3.385s
+RESULT artifacts k=4 constraints=53364 compile=434ms setup=3.816s
+RESULT artifacts k=5 constraints=61476 compile=467ms setup=4.206s
+RESULT artifacts k=6 constraints=69588 compile=524ms setup=5.609s
+$ part A: k=6 proving pinned with taskset, 20 proofs per condition, 3 alternating rounds
+RESULT pin round=1 cond=one cpus=0 k=6 cores=1 n=20 min=1.149s median=1.168s max=1.183s
+RESULT pin round=1 cond=same_core cpus=0,1 k=6 cores=2 n=20 min=949ms median=993ms max=1.05s
+RESULT pin round=1 cond=diff_core cpus=0,2 k=6 cores=2 n=20 min=683ms median=776ms max=802ms
+RESULT pin round=1 cond=all cpus=0,1,2,3 k=6 cores=4 n=20 min=491ms median=521ms max=537ms
+RESULT pin round=2 cond=all cpus=0,1,2,3 k=6 cores=4 n=20 min=495ms median=518ms max=542ms
+RESULT pin round=2 cond=diff_core cpus=0,2 k=6 cores=2 n=20 min=682ms median=745ms max=807ms
+RESULT pin round=2 cond=same_core cpus=0,1 k=6 cores=2 n=20 min=946ms median=996ms max=1.029s
+RESULT pin round=2 cond=one cpus=0 k=6 cores=1 n=20 min=1.159s median=1.175s max=1.2s
+RESULT pin round=3 cond=one cpus=0 k=6 cores=1 n=20 min=1.147s median=1.16s max=1.251s
+RESULT pin round=3 cond=same_core cpus=0,1 k=6 cores=2 n=20 min=925ms median=984ms max=1.03s
+RESULT pin round=3 cond=diff_core cpus=0,2 k=6 cores=2 n=20 min=672ms median=703ms max=818ms
+RESULT pin round=3 cond=all cpus=0,1,2,3 k=6 cores=4 n=20 min=505ms median=525ms max=541ms
+$ part B: real HTTP service under closed-loop load, k=6, GOMAXPROCS=4, no pinning
+RESULT idle_rss after_warmup=217MB
+RESULT load k6 c=1 n=116 errors=0 span=60.2s throughput=1.925/s p50=516ms p95=539ms p99=544ms max=547ms rss_peak=264MB rss_avg=252MB
+RESULT server_prove c=1 n=117 p50=516ms p99=543ms
+RESULT load k6 c=2 n=137 errors=0 span=60.3s throughput=2.271/s p50=875ms p95=1051ms p99=1159ms max=1177ms rss_peak=307MB rss_avg=285MB
+RESULT server_prove c=2 n=139 p50=868ms p99=1152ms
+RESULT load k6 c=4 n=141 errors=0 span=61.2s throughput=2.305/s p50=1723ms p95=2000ms p99=2513ms max=2687ms rss_peak=406MB rss_avg=356MB
+RESULT server_prove c=4 n=145 p50=1721ms p99=2512ms
+RESULT load k6 c=8 n=137 errors=0 span=61.3s throughput=2.235/s p50=3318ms p95=5053ms p99=6186ms max=6442ms rss_peak=516MB rss_avg=455MB
+RESULT server_prove c=8 n=145 p50=3294ms p99=6171ms
+RESULT load k6 c=16 n=132 errors=0 span=61.2s throughput=2.158/s p50=6695ms p95=10872ms p99=11553ms max=11980ms rss_peak=682MB rss_avg=635MB
+RESULT server_prove c=16 n=148 p50=6643ms p99=11840ms
+$ part B, sustained: 4 in flight for 300s, 30 s windows
+RESULT load sustained c=4 n=688 errors=0 span=301.0s throughput=2.285/s p50=1732ms p95=2068ms p99=2631ms max=3027ms rss_peak=421MB rss_avg=361MB
+RESULT window sustained c=4 t=  0s len=30s completed=64 throughput=2.133/s p50=1773ms p99=2765ms rss_peak=409MB
+RESULT window sustained c=4 t= 30s len=30s completed=67 throughput=2.233/s p50=1704ms p99=3027ms rss_peak=409MB
+RESULT window sustained c=4 t= 60s len=30s completed=68 throughput=2.267/s p50=1751ms p99=2631ms rss_peak=412MB
+RESULT window sustained c=4 t= 90s len=30s completed=70 throughput=2.333/s p50=1751ms p99=2825ms rss_peak=421MB
+RESULT window sustained c=4 t=120s len=30s completed=68 throughput=2.267/s p50=1754ms p99=2711ms rss_peak=414MB
+RESULT window sustained c=4 t=150s len=30s completed=68 throughput=2.267/s p50=1719ms p99=2533ms rss_peak=403MB
+RESULT window sustained c=4 t=180s len=30s completed=71 throughput=2.367/s p50=1725ms p99=2616ms rss_peak=413MB
+RESULT window sustained c=4 t=210s len=30s completed=69 throughput=2.300/s p50=1726ms p99=2600ms rss_peak=409MB
+RESULT window sustained c=4 t=240s len=30s completed=68 throughput=2.267/s p50=1713ms p99=1928ms rss_peak=409MB
+RESULT window sustained c=4 t=270s len=30s completed=71 throughput=2.367/s p50=1728ms p99=2328ms rss_peak=420MB
+RESULT window sustained c=4 t=300s len=1s completed=4 throughput=3.847/s p50=1338ms p99=1711ms rss_peak=404MB
+$ date -u '+%Y-%m-%d %H:%M:%S UTC'
+2026-10-23 15:39:58 UTC
