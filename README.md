@@ -23,6 +23,17 @@ The only other difference from a plain upstream build is dependency resolution i
 | `TestKeyLoad` | Times reading the constraint system and the proving key from disk, which the service does once per k on its first request. |
 | HTTP section of `run.sh` | Starts the real service, sends one cold request and `HTTP_RUNS` timed requests per k, reports the median. |
 
+## Load and controlled-CPU experiments
+
+`run_load.sh` (workflow `enygma-load`) adds two experiments on the same unmodified upstream commit, k=6:
+
+- **CPU pinning.** The proving benchmark runs inside fixed CPU sets chosen from the guest topology with `taskset`: one CPU, two hyperthread siblings of one core (when the guest has SMT), two CPUs on different cores, and all CPUs. Conditions alternate order across rounds so host drift hits each one equally. This is a controlled experiment inside the guest; it still cannot see how the host maps vCPUs to physical cores.
+- **Sustained load.** The real HTTP service is started as shipped, and `loadgen/` (standard library only) keeps 1, 2, 4, 8 and 16 requests in flight for 60 s each, recording every request's latency (p50, p95, p99), throughput, and the server's resident memory sampled every 100 ms. The service's own per-request `Prove` timings are summarised alongside. A final 5-minute run holds one request per CPU in flight and reports 30 s windows.
+
+The workflow runs two independent jobs on each of the x64 and arm64 runners, so every result is repeated on a separately provisioned machine. Logs land in `results/load-*.log`.
+
+These measure the prover service under load. They are not measurements of Rayls settlement throughput, which also involves the ledgers, the relayer and the Private Network Hub.
+
 ## Run it
 
 ```bash

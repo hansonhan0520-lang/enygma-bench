@@ -40,6 +40,21 @@ func benchProcs() []int {
 	return out
 }
 
+// benchKs lists the anonymity-set sizes TestProveAcrossK times (BENCH_KS, default "2,3,4,5,6").
+func benchKs() []int {
+	spec := os.Getenv("BENCH_KS")
+	if spec == "" {
+		spec = "2,3,4,5,6"
+	}
+	var out []int
+	for _, f := range strings.Split(spec, ",") {
+		if n, err := strconv.Atoi(strings.TrimSpace(f)); err == nil && n >= 2 && n <= 6 {
+			out = append(out, n)
+		}
+	}
+	return out
+}
+
 // benchRuns is the number of timed proofs per configuration (BENCH_RUNS, default 20).
 func benchRuns() int {
 	if n, err := strconv.Atoi(os.Getenv("BENCH_RUNS")); err == nil && n > 0 {

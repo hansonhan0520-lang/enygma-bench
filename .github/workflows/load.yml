@@ -1,0 +1,52 @@
+name: enygma-load
+
+# Controlled-CPU pinning and sustained-load experiments (run_load.sh).
+# Two independent jobs per runner type, so each result is repeated on a
+# separately provisioned machine.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sustain_secs:
+        description: "Length of the sustained run in seconds"
+        default: "300"
+  push:
+    branches: [main]
+    paths: ["loadgen/**", "run_load.sh", "harness/**", ".github/workflows/load.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  load:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+        rep: [a, b]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.8"
+          cache: false
+      - name: Load and pinning experiments
+        env:
+          GOTOOLCHAIN: local
+          SUSTAIN_SECS: ${{ github.event.inputs.sustain_secs || '300' }}
+          LABEL: load-${{ matrix.runner == 'ubuntu-24.04' && 'x64' || 'arm64' }}-${{ matrix.rep }}-run${{ github.run_id }}
+        run: ./run_load.sh
+      - name: Commit the log to results/
+        env:
+          LABEL: load-${{ matrix.runner == 'ubuntu-24.04' && 'x64' || 'arm64' }}-${{ matrix.rep }}-run${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "results/$LABEL.log"
+          git commit -m "results: $LABEL"
+          for i in 1 2 3 4 5 6; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep $((RANDOM % 15 + 5))
+          done

@@ -102,7 +102,7 @@ func TestSetupArtifacts(t *testing.T) {
 func TestProveAcrossK(t *testing.T) {
 	n := benchRuns()
 	fmt.Printf("RESULT env NumCPU=%d arch=%s go=%s cpu=%q\n", runtime.NumCPU(), runtime.GOARCH, runtime.Version(), cpuModel())
-	for _, k := range []int{2, 3, 4, 5, 6} {
+	for _, k := range benchKs() {
 		ccs := loadCCS(t, k)
 		pk, err := primitives.LoadProvingKey(ecc.BN254, fmt.Sprintf("../../../../../last_build/keys/Enygmak%dPk.key", k))
 		if err != nil { t.Fatal(err) }

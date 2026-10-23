@@ -8,7 +8,7 @@ on:
         default: "20"
   push:
     branches: [main]
-    paths: ["harness/**", "run.sh", "extract_vectors.py", ".github/workflows/bench.yml"]
+    paths: ["run.sh", "extract_vectors.py", ".github/workflows/bench.yml"]
 
 permissions:
   contents: write
