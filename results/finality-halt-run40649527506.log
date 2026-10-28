@@ -1,0 +1,4 @@
+RESULT halt range=2026-05-02..2026-05-08 heights=89195..455264 blocks=366069 mean_interval_incl_gap=1.416s
+RESULT halt before height=351198 time=2026-05-05 21:59:32 UTC epoch=6 round=33416 txs=0 hash=0x4af3a687b3610f19e804aa75d27e7967239d3f6fa0cd1659b3e0f166207725ec
+RESULT halt after  height=351199 time=2026-05-06 09:42:29 UTC epoch=6 round=33420 txs=0 parent=0x4af3a687b3610f19e804aa75d27e7967239d3f6fa0cd1659b3e0f166207725ec
+RESULT halt gap=42177s (11.72 h) parent_links_across_gap=True rpc_calls=69
