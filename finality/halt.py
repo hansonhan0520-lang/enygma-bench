@@ -13,12 +13,13 @@ import calendar, json, sys, time, urllib.request
 
 url, start, end = sys.argv[1], sys.argv[2], sys.argv[3]
 calls = 0
+HDR = {"Content-Type": "application/json", "User-Agent": "enygma-bench-finality"}
 
 def blk(h):
     global calls
     calls += 1
     req = urllib.request.Request(url, data=json.dumps({"jsonrpc": "2.0", "id": 1, "method": "eth_getBlockByNumber",
-                                 "params": [hex(h), False]}).encode(), headers={"Content-Type": "application/json"})
+                                 "params": [hex(h), False]}).encode(), headers=HDR)
     with urllib.request.urlopen(req, timeout=20) as r:
         b = json.load(r)["result"]
     return {"n": h, "ts": int(b["timestamp"], 16), "hash": b["hash"], "parent": b["parentHash"],
@@ -27,7 +28,7 @@ def blk(h):
 def height_at(ts):
     lo, hi = 1, int(json.load(urllib.request.urlopen(urllib.request.Request(url, data=json.dumps(
         {"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []}).encode(),
-        headers={"Content-Type": "application/json"}), timeout=20))["result"], 16)
+        headers=HDR), timeout=20))["result"], 16)
     while lo < hi:
         mid = (lo + hi) // 2
         if blk(mid)["ts"] < ts:
