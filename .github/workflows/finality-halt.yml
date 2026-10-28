@@ -2,6 +2,13 @@ name: finality-halt
 
 on:
   workflow_dispatch:
+    inputs:
+      start:
+        description: "Range start, UTC date"
+        default: "2026-06-19"
+      end:
+        description: "Range end, UTC date"
+        default: "2026-06-24"
   push:
     branches: [main]
     paths: ["finality/halt.py", ".github/workflows/finality-halt.yml"]
@@ -14,10 +21,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Find the longest block gap around the 2026-06-21 incident
+      - name: Find the longest block gap in the range
         run: |
           mkdir -p results
-          python3 finality/halt.py https://mainnet-rpc.rayls.com/ 2026-06-19 2026-06-24 2>&1 | tee "results/finality-halt-run${{ github.run_id }}.log"
+          python3 finality/halt.py https://mainnet-rpc.rayls.com/ ${{ github.event.inputs.start || '2026-06-19' }} ${{ github.event.inputs.end || '2026-06-24' }} 2>&1 | tee "results/finality-halt-run${{ github.run_id }}.log"
       - name: Commit the results
         run: |
           git config user.name "github-actions[bot]"
