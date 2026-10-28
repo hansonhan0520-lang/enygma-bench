@@ -1,0 +1,79 @@
+$ sampling 2 chains for 3600s, started 2026-10-28 06:12:55 UTC
+$ finished 2026-10-28 07:18:48 UTC
+RESULT finality ethereum polls=3600 errors=0 poll=1.0s window=3600s rtt_p50=121ms
+RESULT finality ethereum finalized_lag_blocks min=62 p50=79 max=95 finalized_lag_secs min=756 p50=960 max=1152 polls_with_finalized_eq_latest=0
+RESULT finality ethereum safe_lag_blocks min=30 p50=47 max=63
+RESULT finality ethereum heights_seen=299 span_blocks=298 span_secs=3600 mean_block_interval=12.081s
+RESULT finality ethereum block_ts_delta_histogram={"12": 296, "24": 2}
+RESULT finality ethereum observer_delay_secs p50=2.27 p95=4.30 (block timestamps have 1 s resolution)
+RESULT finality ethereum recheck_latest changed=0 checked=299 failed=0
+RESULT finality ethereum recheck_finalized changed=0 checked=11 failed=0
+RESULT finality rayls polls=14392 errors=0 poll=0.25s window=3600s rtt_p50=64ms
+RESULT finality rayls finalized_lag_blocks min=0 p50=0 max=0 finalized_lag_secs min=0 p50=0 max=0 polls_with_finalized_eq_latest=14392
+RESULT finality rayls safe_lag_blocks min=0 p50=0 max=0
+RESULT finality rayls heights_seen=2661 span_blocks=2667 span_secs=3600 mean_block_interval=1.350s
+RESULT finality rayls block_ts_delta_histogram={"0": 3, "1": 1711, "2": 941}
+RESULT finality rayls observer_delay_secs p50=2.07 p95=2.58 (block timestamps have 1 s resolution)
+RESULT finality rayls recheck_latest changed=0 checked=2661 failed=0
+RESULT finality rayls recheck_finalized changed=0 checked=2661 failed=0
+RESULT history rayls from=1 to=222843 from_utc=2026-04-30 to_utc=2026-05-03 mean_interval=1.292s
+RESULT history rayls from=222843 to=445685 from_utc=2026-05-03 to_utc=2026-05-07 mean_interval=1.496s
+RESULT history rayls from=445685 to=668527 from_utc=2026-05-07 to_utc=2026-05-11 mean_interval=1.305s
+RESULT history rayls from=668527 to=891369 from_utc=2026-05-11 to_utc=2026-05-14 mean_interval=1.317s
+RESULT history rayls from=891369 to=1114211 from_utc=2026-05-14 to_utc=2026-05-17 mean_interval=1.298s
+RESULT history rayls from=1114211 to=1337053 from_utc=2026-05-17 to_utc=2026-05-21 mean_interval=1.318s
+RESULT history rayls from=1337053 to=1559895 from_utc=2026-05-21 to_utc=2026-05-24 mean_interval=1.309s
+RESULT history rayls from=1559895 to=1782737 from_utc=2026-05-24 to_utc=2026-05-28 mean_interval=1.306s
+RESULT history rayls from=1782737 to=2005579 from_utc=2026-05-28 to_utc=2026-05-31 mean_interval=1.310s
+RESULT history rayls from=2005579 to=2228421 from_utc=2026-05-31 to_utc=2026-06-03 mean_interval=1.304s
+RESULT history rayls from=2228421 to=2451263 from_utc=2026-06-03 to_utc=2026-06-07 mean_interval=1.304s
+RESULT history rayls from=2451263 to=2674105 from_utc=2026-06-07 to_utc=2026-06-10 mean_interval=1.303s
+RESULT history rayls from=2674105 to=2896947 from_utc=2026-06-10 to_utc=2026-06-13 mean_interval=1.304s
+RESULT history rayls from=2896947 to=3119789 from_utc=2026-06-13 to_utc=2026-06-17 mean_interval=1.303s
+RESULT history rayls from=3119789 to=3342631 from_utc=2026-06-17 to_utc=2026-06-20 mean_interval=1.310s
+RESULT history rayls from=3342631 to=3565473 from_utc=2026-06-20 to_utc=2026-06-24 mean_interval=1.461s
+RESULT history rayls from=3565473 to=3788315 from_utc=2026-06-24 to_utc=2026-06-27 mean_interval=1.298s
+RESULT history rayls from=3788315 to=4011157 from_utc=2026-06-27 to_utc=2026-07-01 mean_interval=1.298s
+RESULT history rayls from=4011157 to=4233999 from_utc=2026-07-01 to_utc=2026-07-04 mean_interval=1.299s
+RESULT history rayls from=4233999 to=4456841 from_utc=2026-07-04 to_utc=2026-07-07 mean_interval=1.297s
+RESULT history rayls from=4456841 to=4679683 from_utc=2026-07-07 to_utc=2026-07-11 mean_interval=1.296s
+RESULT history rayls from=4679683 to=4902525 from_utc=2026-07-11 to_utc=2026-07-14 mean_interval=1.297s
+RESULT history rayls from=4902525 to=5125367 from_utc=2026-07-14 to_utc=2026-07-17 mean_interval=1.298s
+RESULT history rayls from=5125367 to=5348209 from_utc=2026-07-17 to_utc=2026-07-21 mean_interval=1.296s
+RESULT history rayls from=5348209 to=5571051 from_utc=2026-07-21 to_utc=2026-07-24 mean_interval=1.298s
+RESULT history rayls from=5571051 to=5793893 from_utc=2026-07-24 to_utc=2026-07-27 mean_interval=1.298s
+RESULT history rayls from=5793893 to=6016735 from_utc=2026-07-27 to_utc=2026-07-31 mean_interval=1.299s
+RESULT history rayls from=6016735 to=6239577 from_utc=2026-07-31 to_utc=2026-08-03 mean_interval=1.300s
+RESULT history rayls from=6239577 to=6462419 from_utc=2026-08-03 to_utc=2026-08-06 mean_interval=1.299s
+RESULT history rayls from=6462419 to=6685261 from_utc=2026-08-06 to_utc=2026-08-10 mean_interval=1.300s
+RESULT history rayls from=6685261 to=6908103 from_utc=2026-08-10 to_utc=2026-08-13 mean_interval=1.303s
+RESULT history rayls from=6908103 to=7130945 from_utc=2026-08-13 to_utc=2026-08-17 mean_interval=1.301s
+RESULT history rayls from=7130945 to=7353787 from_utc=2026-08-17 to_utc=2026-08-20 mean_interval=1.299s
+RESULT history rayls from=7353787 to=7576629 from_utc=2026-08-20 to_utc=2026-08-23 mean_interval=1.303s
+RESULT history rayls from=7576629 to=7799471 from_utc=2026-08-23 to_utc=2026-08-27 mean_interval=1.302s
+RESULT history rayls from=7799471 to=8022313 from_utc=2026-08-27 to_utc=2026-08-30 mean_interval=1.300s
+RESULT history rayls from=8022313 to=8245155 from_utc=2026-08-30 to_utc=2026-09-02 mean_interval=1.298s
+RESULT history rayls from=8245155 to=8467997 from_utc=2026-09-02 to_utc=2026-09-06 mean_interval=1.298s
+RESULT history rayls from=8467997 to=8690839 from_utc=2026-09-06 to_utc=2026-09-09 mean_interval=1.298s
+RESULT history rayls from=8690839 to=8913681 from_utc=2026-09-09 to_utc=2026-09-11 mean_interval=0.893s
+RESULT history rayls from=8913681 to=9136523 from_utc=2026-09-11 to_utc=2026-09-13 mean_interval=0.703s
+RESULT history rayls from=9136523 to=9359365 from_utc=2026-09-13 to_utc=2026-09-15 mean_interval=0.695s
+RESULT history rayls from=9359365 to=9582207 from_utc=2026-09-15 to_utc=2026-09-17 mean_interval=0.694s
+RESULT history rayls from=9582207 to=9805049 from_utc=2026-09-17 to_utc=2026-09-18 mean_interval=0.694s
+RESULT history rayls from=9805049 to=10027891 from_utc=2026-09-18 to_utc=2026-09-20 mean_interval=0.699s
+RESULT history rayls from=10027891 to=10250733 from_utc=2026-09-20 to_utc=2026-09-22 mean_interval=0.698s
+RESULT history rayls from=10250733 to=10473575 from_utc=2026-09-22 to_utc=2026-09-24 mean_interval=0.696s
+RESULT history rayls from=10473575 to=10696417 from_utc=2026-09-24 to_utc=2026-09-26 mean_interval=0.694s
+RESULT history rayls from=10696417 to=10919259 from_utc=2026-09-26 to_utc=2026-09-27 mean_interval=0.694s
+RESULT history rayls from=10919259 to=11142101 from_utc=2026-09-27 to_utc=2026-09-29 mean_interval=0.695s
+RESULT history rayls from=11142101 to=11364943 from_utc=2026-09-29 to_utc=2026-10-01 mean_interval=0.696s
+RESULT history rayls from=11364943 to=11587785 from_utc=2026-10-01 to_utc=2026-10-03 mean_interval=0.696s
+RESULT history rayls from=11587785 to=11810627 from_utc=2026-10-03 to_utc=2026-10-05 mean_interval=0.693s
+RESULT history rayls from=11810627 to=12033469 from_utc=2026-10-05 to_utc=2026-10-07 mean_interval=0.937s
+RESULT history rayls from=12033469 to=12256311 from_utc=2026-10-07 to_utc=2026-10-10 mean_interval=1.330s
+RESULT history rayls from=12256311 to=12479153 from_utc=2026-10-10 to_utc=2026-10-14 mean_interval=1.327s
+RESULT history rayls from=12479153 to=12701995 from_utc=2026-10-14 to_utc=2026-10-17 mean_interval=1.327s
+RESULT history rayls from=12701995 to=12924837 from_utc=2026-10-17 to_utc=2026-10-21 mean_interval=1.345s
+RESULT history rayls from=12924837 to=13147679 from_utc=2026-10-21 to_utc=2026-10-24 mean_interval=1.343s
+RESULT history rayls from=13147679 to=13370521 from_utc=2026-10-24 to_utc=2026-10-28 mean_interval=1.376s
+RESULT history rayls from=13370521 to=13370573 from_utc=2026-10-28 to_utc=2026-10-28 mean_interval=1.385s
