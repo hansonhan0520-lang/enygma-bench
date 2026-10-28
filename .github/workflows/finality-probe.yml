@@ -1,0 +1,18 @@
+name: finality-probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["finality/probe.py", ".github/workflows/finality-probe.yml"]
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe
+        run: |
+          python3 finality/probe.py \
+            rayls=https://mainnet-rpc.rayls.com/ \
+            ethereum=https://ethereum-rpc.publicnode.com
