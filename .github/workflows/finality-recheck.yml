@@ -1,0 +1,30 @@
+name: finality-recheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["finality/recheck.py", ".github/workflows/finality-recheck.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  recheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Re-check every recorded hash
+        run: |
+          python3 finality/recheck.py \
+            rayls=https://mainnet-rpc.rayls.com/ 'results/finality-run*-rayls-polls.csv.gz' \
+            ethereum=https://ethereum-rpc.publicnode.com 'results/finality-run*-ethereum-polls.csv.gz' \
+            2>&1 | tee "results/finality-recheck-run${{ github.run_id }}.log"
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/finality-recheck-run*.log
+          git commit -m "results: finality recheck ${{ github.run_id }}"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 7; done

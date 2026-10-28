@@ -16,7 +16,7 @@ changed over the chain's life.
 Usage: sample.py NAME=URL[,poll_seconds] ...
 Env:   DURATION (default 3600), HISTORY (comma-separated names), OUT (dir)
 """
-import csv, json, os, statistics as st, sys, threading, time, urllib.request
+import csv, json, os, statistics as st, sys, threading, time, urllib.error, urllib.request
 
 DURATION = float(os.environ.get("DURATION", "3600"))
 HISTORY = set(filter(None, os.environ.get("HISTORY", "").split(",")))
@@ -24,11 +24,18 @@ OUT = os.environ.get("OUT", "results")
 LABEL = os.environ.get("LABEL", "finality")
 
 
-def post(url, payload, timeout=20):
+def post(url, payload, timeout=20, tries=6):
+    """POST JSON-RPC. HTTP 429 (rate limited) is retried with exponential backoff."""
     req = urllib.request.Request(url, data=json.dumps(payload).encode(),
                                  headers={"Content-Type": "application/json", "User-Agent": "enygma-bench-finality"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.load(r)
+    for i in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or i == tries - 1:
+                raise
+            time.sleep(2 ** i)
 
 
 def block(url, tag):
@@ -78,6 +85,7 @@ def run_chain(name, url, poll, results):
     def recheck(hashes):
         changed = checked = failed = 0
         for h, want in hashes.items():
+            time.sleep(0.1)
             try:
                 got = block(url, hex(h))["hash"]
                 checked += 1
@@ -123,6 +131,7 @@ def run_chain(name, url, poll, results):
         f"RESULT finality {name} recheck_latest changed={lat_changed} checked={lat_checked} failed={lat_failed}",
         f"RESULT finality {name} recheck_finalized changed={fin_changed} checked={fin_checked} failed={fin_failed}",
     ]
+    results[name] = lines  # keep the summary even if the history step fails
     if name in HISTORY:
         head = int(post(url, {"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []})["result"], 16)
         step = max(1, head // 60)
