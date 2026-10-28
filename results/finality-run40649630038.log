@@ -1,0 +1,40 @@
+$ sampling 2 chains for 3600s, started 2026-10-28 07:22:24 UTC
+Exception in thread Thread-1 (run_chain):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/runner/work/enygma-bench/enygma-bench/finality/sample.py", line 127, in run_chain
+    head = int(post(url, {"jsonrpc": "2.0", "id": 1, "method": "eth_blockNumber", "params": []})["result"], 16)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/enygma-bench/enygma-bench/finality/sample.py", line 30, in post
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests
+$ finished 2026-10-28 08:26:01 UTC
+RESULT finality ethereum polls=3588 errors=0 poll=1.0s window=3600s rtt_p50=32ms
+RESULT finality ethereum finalized_lag_blocks min=63 p50=80 max=95 finalized_lag_secs min=756 p50=960 max=1140 polls_with_finalized_eq_latest=0
+RESULT finality ethereum safe_lag_blocks min=31 p50=48 max=63
+RESULT finality ethereum heights_seen=300 span_blocks=299 span_secs=3600 mean_block_interval=12.040s
+RESULT finality ethereum block_ts_delta_histogram={"12": 298, "24": 1}
+RESULT finality ethereum observer_delay_secs p50=2.43 p95=4.27 (block timestamps have 1 s resolution)
+RESULT finality ethereum recheck_latest changed=0 checked=300 failed=0
+RESULT finality ethereum recheck_finalized changed=0 checked=10 failed=0
