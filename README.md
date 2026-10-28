@@ -51,6 +51,8 @@ Results so far:
 | Run 40642493952, 2026-10-28 06:12 to 07:12 UTC | 14,392 polls, `finalized` = `latest` in all of them | `finalized` 62 to 95 blocks behind (756 to 1,152 s, median 960 s) |
 | Mean block interval in the hour | 1.350 s | 12.081 s |
 | Heights re-checked after the hour, hashes changed | 2,661 checked, 0 changed | 299 checked, 0 changed |
+| Run 40649630038, 07:22 to 08:22 UTC | 13,396 polls, `finalized` = `latest` in all of them, mean interval 1.347 s (recomputed from the polls CSV: the public RPC returned HTTP 429 during the closing history step and the summary was lost; `sample.py` now retries 429) | `finalized` 63 to 95 blocks behind (756 to 1,140 s, median 960 s), mean interval 12.040 s |
+| Delayed re-check (`finality-recheck`), 0.3 to 1.4 h after sampling | 5,325 heights from both runs, 0 changed | 605 heights, 0 changed |
 
 Two halts located with `finality-halt` (block after the gap links to the block before it in both cases, so the chain resumed rather than forked):
 

@@ -524,6 +524,39 @@
      "interval": 1.385
     }
    ]
+  },
+  "40649630038": {
+   "file": "finality-run40649630038.log",
+   "start": "2026-10-28 07:22:24 UTC",
+   "ethereum": {
+    "polls": 3588,
+    "errors": 0,
+    "lag_blocks": [
+     63,
+     80,
+     95
+    ],
+    "lag_secs": [
+     756,
+     960,
+     1140
+    ],
+    "safe_lag": [
+     31,
+     48,
+     63
+    ],
+    "heights": 300,
+    "mean_interval": 12.04
+   },
+   "rayls": {
+    "polls": 13396,
+    "eq_latest": 13396,
+    "safe_eq": 13396,
+    "heights": 2664,
+    "mean_interval": 1.347,
+    "note": "summary lines lost to HTTP 429 during the history step; figures recomputed from the saved polls CSV"
+   }
   }
  },
  "halts": [
@@ -565,27 +598,41 @@
    "gap_s": 32954,
    "gap_h": 9.15,
    "linked": true,
-   "file": "finality-halt-run40642835254.log"
+   "file": "finality-halt-run40649382535.log"
+  }
+ ],
+ "delayed_recheck": [
+  {
+   "chain": "rayls",
+   "file": "finality-run40642493952-rayls-polls.csv.gz",
+   "checked": 2661,
+   "changed": 0,
+   "failed": 0,
+   "hours_after": 1.4
   },
   {
-   "before": {
-    "height": 3367007,
-    "time": "2026-06-21 01:05:33 UTC",
-    "epoch": 52,
-    "round": 50386,
-    "hash": "0x8c4a4d9c286ee50ff61e1e9cc1715ad7d03073bfe2bb0725ee78a0d50283c861"
-   },
-   "after": {
-    "height": 3367008,
-    "time": "2026-06-21 10:14:47 UTC",
-    "epoch": 52,
-    "round": 50394,
-    "parent": "0x8c4a4d9c286ee50ff61e1e9cc1715ad7d03073bfe2bb0725ee78a0d50283c861"
-   },
-   "gap_s": 32954,
-   "gap_h": 9.15,
-   "linked": true,
-   "file": "finality-halt-run40649382535.log"
+   "chain": "rayls",
+   "file": "finality-run40649630038-rayls-polls.csv.gz",
+   "checked": 2664,
+   "changed": 0,
+   "failed": 0,
+   "hours_after": 0.3
+  },
+  {
+   "chain": "ethereum",
+   "file": "finality-run40642493952-ethereum-polls.csv.gz",
+   "checked": 302,
+   "changed": 0,
+   "failed": 0,
+   "hours_after": 1.5
+  },
+  {
+   "chain": "ethereum",
+   "file": "finality-run40649630038-ethereum-polls.csv.gz",
+   "checked": 303,
+   "changed": 0,
+   "failed": 0,
+   "hours_after": 0.4
   }
  ]
 }
