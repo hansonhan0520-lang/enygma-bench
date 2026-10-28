@@ -1,0 +1,45 @@
+name: finality
+
+# Samples latest / safe / finalized heads on the Rayls public chain and on
+# Ethereum mainnet in parallel, then re-checks every recorded block hash to
+# detect reorgs. See finality/sample.py.
+
+on:
+  workflow_dispatch:
+    inputs:
+      duration:
+        description: "Sampling window in seconds"
+        default: "3600"
+  push:
+    branches: [main]
+    paths: ["finality/sample.py", ".github/workflows/finality.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  sample:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sample
+        env:
+          DURATION: ${{ github.event.inputs.duration || '3600' }}
+          HISTORY: rayls
+          OUT: results
+          LABEL: finality-run${{ github.run_id }}
+        run: |
+          mkdir -p results
+          python3 finality/sample.py \
+            rayls=https://mainnet-rpc.rayls.com/,0.25 \
+            ethereum=https://ethereum-rpc.publicnode.com,1 \
+            2>&1 | tee "results/finality-run${{ github.run_id }}.log"
+          gzip -9 results/finality-run${{ github.run_id }}-*-polls.csv
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/finality-run${{ github.run_id }}*
+          git commit -m "results: finality run ${{ github.run_id }}"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 7; done
