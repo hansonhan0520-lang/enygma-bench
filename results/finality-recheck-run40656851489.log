@@ -1,0 +1,6 @@
+$ recheck started 2026-10-28 08:27:02 UTC
+RESULT recheck rayls file=finality-run40642493952-rayls-polls.csv.gz heights_latest=2661 heights_finalized=2661 checked=2661 changed=0 failed=0 hours_since_sampling=1.4
+RESULT recheck rayls file=finality-run40649630038-rayls-polls.csv.gz heights_latest=2664 heights_finalized=2664 checked=2664 changed=0 failed=0 hours_since_sampling=0.3
+RESULT recheck ethereum file=finality-run40642493952-ethereum-polls.csv.gz heights_latest=299 heights_finalized=11 checked=302 changed=0 failed=0 hours_since_sampling=1.5
+RESULT recheck ethereum file=finality-run40649630038-ethereum-polls.csv.gz heights_latest=300 heights_finalized=10 checked=303 changed=0 failed=0 hours_since_sampling=0.4
+$ recheck finished 2026-10-28 08:44:19 UTC
