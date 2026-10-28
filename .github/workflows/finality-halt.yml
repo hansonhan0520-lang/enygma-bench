@@ -1,0 +1,27 @@
+name: finality-halt
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["finality/halt.py", ".github/workflows/finality-halt.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  halt:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find the longest block gap around the 2026-06-21 incident
+        run: |
+          mkdir -p results
+          python3 finality/halt.py https://mainnet-rpc.rayls.com/ 2026-06-19 2026-06-24 2>&1 | tee "results/finality-halt-run${{ github.run_id }}.log"
+      - name: Commit the results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/finality-halt-run*.log
+          git commit -m "results: halt gap ${{ github.run_id }}"
+          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && break; sleep 7; done
