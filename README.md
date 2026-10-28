@@ -34,6 +34,33 @@ The workflow runs two independent jobs on each of the x64 and arm64 runners, so 
 
 These measure the prover service under load. They are not measurements of Rayls settlement throughput, which also involves the ledgers, the relayer and the Private Network Hub.
 
+## Finality experiments
+
+`finality/` asks a different question from the prover benchmarks: when is a transfer final? It reads the chains' own JSON-RPC, nothing is modified, and every output is committed to `results/`.
+
+- **`finality.yml` / `finality/sample.py`.** Samples the Rayls public chain (`mainnet-rpc.rayls.com`, every 0.25 s) and Ethereum mainnet (PublicNode, every 1 s) in parallel for an hour. Each poll is one batched request for the `latest`, `safe` and `finalized` blocks, so the three are read together. The hash of every height is recorded when first seen; after the window every height is fetched again and compared, which detects any replaced block. For Rayls it also reads block timestamps at 60 evenly spaced heights from genesis to show how the block interval has changed.
+- **`finality-halt.yml` / `finality/halt.py`.** Bisects block timestamps inside a date range to find the longest gap between consecutive blocks, and checks that the block after the gap has the block before it as its parent.
+- **`finality-probe.yml`.** One-shot check of what each RPC reports.
+
+The Rayls RPC reports `web3_clientVersion` `1.4.1 (6909618…)`, the public tag `mainnet-v1.4.1` of [raylsnetwork/axyl](https://github.com/raylsnetwork/axyl). In that tag, `crates/middleware/processor/src/execution/orchestrator.rs` (lines 268 to 269) executes each consensus output and immediately calls `finalize_block`, which sets both `finalized` and `safe` to that block (`crates/execution/evm/src/reth_env/persistence.rs`, lines 27 and 33).
+
+Results so far:
+
+| | Rayls public chain | Ethereum mainnet |
+|---|---|---|
+| Run 40642493952, 2026-10-28 06:12 to 07:12 UTC | 14,392 polls, `finalized` = `latest` in all of them | `finalized` 62 to 95 blocks behind (756 to 1,152 s, median 960 s) |
+| Mean block interval in the hour | 1.350 s | 12.081 s |
+| Heights re-checked after the hour, hashes changed | 2,661 checked, 0 changed | 299 checked, 0 changed |
+
+Two halts located with `finality-halt` (block after the gap links to the block before it in both cases, so the chain resumed rather than forked):
+
+| Gap | Length | Epoch, rounds | Log |
+|---|---|---|---|
+| 2026-05-05 21:59:32 to 2026-05-06 09:42:29 UTC, heights 351198 to 351199 | 11.72 h | 6, 33416 to 33420 | [log](results/finality-halt-run40649527506.log) |
+| 2026-06-21 01:05:33 to 10:14:47 UTC, heights 3367007 to 3367008 | 9.15 h | 52, 50386 to 50394 | [log](results/finality-halt-run40642835254.log) |
+
+Only the longest gap in each date range was searched, so shorter halts are not excluded. An hour without an Ethereum reorg says nothing about Ethereum's reorg rate.
+
 ## Run it
 
 ```bash
